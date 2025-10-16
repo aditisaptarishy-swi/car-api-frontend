@@ -68,39 +68,134 @@ function App() {
   };
 
   return (
-    <div style={{ padding: '2rem' }}>
-      <h2>🚗 Car Inventory</h2>
+  <div style={{
+    fontFamily: 'Segoe UI, sans-serif',
+    backgroundColor: '#f8f9fa',
+    padding: '2rem',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    minHeight: '100vh',
+  }}>
+    <div style={{
+      width: '100%',
+      maxWidth: '600px',
+      backgroundColor: '#fff',
+      padding: '2rem',
+      borderRadius: '12px',
+      boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)'
+    }}>
+      <h2 style={{ color: '#333', marginBottom: '1.5rem' }}>🚗 Car Inventory</h2>
 
-      <input
-        type="text"
-        placeholder="Model"
-        value={model}
-        onChange={(e) => setModel(e.target.value)}
-      />
-      <input
-        type="number"
-        placeholder="Year"
-        value={year}
-        onChange={(e) => setYear(e.target.value)}
-      />
+      <div style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: '10px',
+        marginBottom: '1rem'
+      }}>
+        <input
+          type="text"
+          placeholder="Model"
+          value={model}
+          onChange={(e) => setModel(e.target.value)}
+          style={{
+            flex: '1',
+            padding: '10px',
+            borderRadius: '8px',
+            border: '1px solid #ccc',
+            minWidth: '120px'
+          }}
+        />
+        <input
+          type="number"
+          placeholder="Year"
+          value={year}
+          onChange={(e) => setYear(e.target.value)}
+          style={{
+            flex: '1',
+            padding: '10px',
+            borderRadius: '8px',
+            border: '1px solid #ccc',
+            minWidth: '120px'
+          }}
+        />
+        {editingCar ? (
+          <button
+            onClick={handleUpdate}
+            style={{
+              padding: '10px 16px',
+              backgroundColor: '#ffc107',
+              color: '#000',
+              border: 'none',
+              borderRadius: '8px',
+              cursor: 'pointer'
+            }}
+          >
+            Update
+          </button>
+        ) : (
+          <button
+            onClick={handleAdd}
+            style={{
+              padding: '10px 16px',
+              backgroundColor: '#007bff',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '8px',
+              cursor: 'pointer'
+            }}
+          >
+            Add
+          </button>
+        )}
+      </div>
 
-      {editingCar ? (
-        <button onClick={handleUpdate}>Update</button>
-      ) : (
-        <button onClick={handleAdd}>Add</button>
-      )}
-
-      <ul>
-        {cars.map((car) => (
-          <li key={car.id}>
-            {car.model} ({car.year}){' '}
-            <button onClick={() => startEdit(car)}>Edit</button>
-            <button onClick={() => handleDelete(car.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+      {cars.map((car) => (
+        <div key={car.id} style={{
+          backgroundColor: '#f1f1f1',
+          borderRadius: '10px',
+          padding: '12px 16px',
+          marginBottom: '10px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center'
+        }}>
+          <span style={{ fontSize: '16px' }}>{car.model} ({car.year})</span>
+          <div>
+            <button
+              onClick={() => startEdit(car)}
+              style={{
+                backgroundColor: '#ffc107',
+                color: '#000',
+                border: 'none',
+                borderRadius: '6px',
+                padding: '6px 10px',
+                marginRight: '5px',
+                cursor: 'pointer'
+              }}
+            >
+              Edit
+            </button>
+            <button
+              onClick={() => handleDelete(car.id)}
+              style={{
+                backgroundColor: '#dc3545',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '6px',
+                padding: '6px 10px',
+                cursor: 'pointer'
+              }}
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      ))}
     </div>
-  );
+  </div>
+);
+
 }
 
 export default App;
