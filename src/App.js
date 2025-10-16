@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const API_BASE = 'http://localhost:8080/api/car'; // Update if port is different
+const API_BASE = 'https://car-api-backend-dockerfile.onrender.com/api/car'; // Update if port is different
 
 function App() {
   const [cars, setCars] = useState([]);
